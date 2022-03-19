@@ -1,0 +1,16 @@
+name: python-step
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Display the path
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python
