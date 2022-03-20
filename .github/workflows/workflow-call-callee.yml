@@ -1,0 +1,17 @@
+name: workflow-call-callee
+
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      PAT:
+        required: true
+
+jobs:
+  callee:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ inputs.username }} ${{ secrets.PAT }}"

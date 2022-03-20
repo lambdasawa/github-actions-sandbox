@@ -1,0 +1,12 @@
+name: workflow-call-caller-1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-1:
+    uses: ./.github/workflows/workflow-call-callee.yml
+    with:
+      username: alice
+    secrets:
+      PAT: alice-secret

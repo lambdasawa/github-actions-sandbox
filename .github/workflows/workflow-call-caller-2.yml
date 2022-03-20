@@ -1,0 +1,12 @@
+name: workflow-call-caller-2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-2:
+    uses: ./.github/workflows/workflow-call-callee.yml
+    with:
+      username: bob
+    secrets:
+      PAT: bob-secret
