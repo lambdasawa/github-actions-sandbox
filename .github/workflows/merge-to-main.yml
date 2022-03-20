@@ -26,3 +26,5 @@ jobs:
 
           gh pr create -f
           gh pr merge --squash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
