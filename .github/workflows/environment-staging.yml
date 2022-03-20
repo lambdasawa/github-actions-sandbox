@@ -9,4 +9,7 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ secrets.MY_SECRET }} | sha256sum
+      - run: |
+          echo "$MY_SECRET" | sha256sum
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
