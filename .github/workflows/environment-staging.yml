@@ -1,0 +1,12 @@
+name: environment-staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ${{ secrets.MY_SECRET }} | sha256sum
