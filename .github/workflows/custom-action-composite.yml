@@ -4,16 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello_world_job:
+  foo:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Hello world action step
+      - uses: actions/checkout@v2
+
+      - id: hello
         uses: ./custom-action/composite
-        id: hello
         with:
-          who-to-greet: "Mona the Octocat"
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          name: "lambdasawa"
+
+      - run: echo "${{ steps.hello.outputs.time }}"

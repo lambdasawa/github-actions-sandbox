@@ -1,19 +1,18 @@
-name: "Hello World"
-description: "Greet someone"
+name: "My Composite Action"
+description: "Execute awesome steps"
 inputs:
-  who-to-greet:
-    description: "Who to greet"
+  name:
     required: true
-    default: "World"
+    default: "world"
 outputs:
   time:
-    description: "The time we greeted you"
-    value: ${{ steps.current-time.outputs.time }}
+    value: ${{ steps.now.outputs.time }}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - run: echo Hello ${{ inputs.name }}.
       shell: bash
-    - id: current-time
+
+    - id: now
       run: echo "::set-output name=time::$(date +%s)"
       shell: bash
