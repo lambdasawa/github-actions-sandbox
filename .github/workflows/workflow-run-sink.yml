@@ -1,0 +1,15 @@
+name: workflow-run-sink
+
+on:
+  workflow_run:
+    workflows: [workflow-run-source]
+    types:
+      - completed
+
+jobs:
+  foo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: echo "Hello, ${{ github.event.workflow_run.conclusion }}"
