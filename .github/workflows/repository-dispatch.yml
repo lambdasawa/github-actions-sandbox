@@ -1,0 +1,14 @@
+name: repository-dispatch
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [my-type]
+
+jobs:
+  foo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $VALUE
+        env:
+          VALUE: ${{ github.event.client_payload.value }}
