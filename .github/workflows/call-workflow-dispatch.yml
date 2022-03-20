@@ -10,3 +10,5 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: gh workflow run workflow-dispatch.yml -f stringValue=foo -f booleanValue=true -f envValue=develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
