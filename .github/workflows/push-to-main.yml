@@ -15,8 +15,8 @@ jobs:
           ts="$(date +%s)"
           echo "$ts" > timestamp
 
-          git config --global user.email "lambdasawa@gmail.com"
-          git config --global user.name "Tsubasa Irisawa (bot)"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
           git add timestamp
           git commit -m "Update timestamp"
