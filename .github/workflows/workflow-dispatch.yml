@@ -1,0 +1,35 @@
+name: workflow-dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      stringValue:
+        description: "desc1"
+      booleanValue:
+        description: "desc2"
+        required: true
+        type: boolean
+      choiceValue:
+        description: "desc3"
+        required: true
+        default: "green"
+        type: choice
+        options:
+          - red
+          - green
+          - blue
+      envValue:
+        description: "desc4"
+        type: environment
+        required: true
+
+jobs:
+  foo:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.envValue }}
+    steps:
+      - run: |
+          echo ${{ github.event.inputs.stringValue }}
+          echo ${{ github.event.inputs.booleanValue }}
+          echo ${{ github.event.inputs.choiceValue }}
+          echo ${{ github.event.inputs.envValue }}
