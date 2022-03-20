@@ -1,0 +1,23 @@
+name: push-to-main
+
+on:
+  workflow_dispatch:
+
+jobs:
+  foo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          set -xeuo pipefail
+
+          ts="$(date +%s)"
+          echo "$ts" > timestamp
+
+          git config --global user.email "lambdasawa@gmail.com"
+          git config --global user.name "Tsubasa Irisawa (bot)"
+
+          git add timestamp
+          git commit -m "Update timestamp"
+          git push origin main
