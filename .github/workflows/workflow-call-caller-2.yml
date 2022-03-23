@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-2:
-    uses: ./.github/workflows/workflow-call-callee.yml
+    uses: .github/workflows/workflow-call-callee.yml
     with:
       username: bob
     secrets:
