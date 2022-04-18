@@ -17,7 +17,7 @@ jobs:
           status: "${{ job.status }}"
           slack-webhook-url: "${{ secrets.SLACK_WEBHOOK_URL }}"
 
-      - run: exit 1
+      - run: exit 0
 
       - uses: ./.github/lib/slack
         if: ${{ always() }}
