@@ -3,9 +3,11 @@ description: "Send slack notification"
 inputs:
   text:
     description: "Slack Text"
+    default: "GitHub Actions"
     required: true
   status:
     description: "GitHub Actions status"
+    default: "success"
     required: true
   slack-webhook-url:
     description: "Slack Webhook URL"
