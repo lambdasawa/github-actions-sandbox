@@ -1,0 +1,27 @@
+name: slack
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/lib/slack
+        with:
+          text: "Start: ${{ github.workflow }}"
+          status: "${{ job.status }}"
+          slack-webhook-url: "${{ secrets.SLACK_WEBHOOK_URL }}"
+
+      - run: exit 1
+
+      - uses: ./.github/lib/slack
+        if: ${{ always() }}
+        with:
+          text: "End: ${{ github.workflow }}"
+          status: "${{ job.status }}"
+          slack-webhook-url: "${{ secrets.SLACK_WEBHOOK_URL }}"

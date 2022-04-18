@@ -1,0 +1,58 @@
+name: "Send slack notification"
+description: "Send slack notification"
+inputs:
+  text:
+    description: "Slack Text"
+    required: true
+  status:
+    description: "GitHub Actions status"
+    required: true
+  slack-webhook-url:
+    description: "Slack Webhook URL"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: color
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { STATUS } = process.env;
+          return (
+            STATUS === "success" ? "#00dd00" :
+            STATUS === "cancelled" ? "#808080" :
+            STATUS === "failure" ? "#dd0000" :
+            "#0000dd"
+          );
+        result-encoding: string
+      env:
+        STATUS: "${{ inputs.status }}"
+
+    - uses: slackapi/slack-github-action@v1.18.0
+      with:
+        payload: |
+          {
+            "username": "GitHub Actions",
+            "icon_url": "https://github.com/github.png?size=48",
+            "text": "${{ inputs.text }}",
+            "attachments": [
+              {
+                "color": "${{ steps.color.outputs.result }}",
+                "author_icon": "${{ github.server_url }}/${{ github.actor }}.png?size=48",
+                "author_link": "${{ github.server_url }}/${{ github.actor }}",
+                "author_name": "${{ github.actor }}",
+                "fields": [
+                  { "title": "Workflow", "value": "${{ github.workflow }}", "short": true },
+                  { "title": "Event", "value": "${{ github.event_name }}", "short": true },
+                  { "title": "Branch or Tag", "value": "<${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}|${{ github.ref_name }}>", "short": true },
+                  { "title": "Commit", "value": "<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>", "short": false },
+                  { "title": "Checks", "value": "<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.sha }}>", "short": false },
+                  { "title": "Pull Request", "value": "<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>", "short": false },
+                  { "title": "Action Run", "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.run_id }}>", "short": false }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
