@@ -1,0 +1,12 @@
+name: cancel-me
+
+on:
+  workflow_dispatch:
+
+concurrency: cancellation-test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 180

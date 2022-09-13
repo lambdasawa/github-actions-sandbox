@@ -1,0 +1,14 @@
+name: cancel-in-progress-false
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: cancellation-test
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 180
