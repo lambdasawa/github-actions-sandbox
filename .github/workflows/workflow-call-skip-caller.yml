@@ -1,0 +1,15 @@
+name: workflow-call-skip-caller
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip:
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  caller:
+    uses: ./.github/workflows/workflow-call-skip-callee.yml
+    with:
+      skip: ${{ github.event.inputs.skip == 'false' }}

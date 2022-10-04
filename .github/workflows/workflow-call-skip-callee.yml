@@ -1,0 +1,16 @@
+name: workflow-call-skip-callee
+
+on:
+  workflow_call:
+    inputs:
+      skip:
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  callee:
+    if: ${{ github.event.inputs.skip == 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
