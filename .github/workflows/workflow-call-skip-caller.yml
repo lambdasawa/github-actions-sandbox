@@ -13,3 +13,9 @@ jobs:
     uses: ./.github/workflows/workflow-call-skip-callee.yml
     with:
       skip: ${{ github.event.inputs.skip == 'false' }}
+
+  after-caller:
+    needs: [caller]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, after-caller!"
