@@ -1,0 +1,11 @@
+name: Hello, world!
+
+on:
+  push:
+
+jobs:
+  hello-world:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo 'Hello, world!'
