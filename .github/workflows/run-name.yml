@@ -1,0 +1,17 @@
+name: Change run-name
+
+run-name: Custom run-name (actor=${{ github.actor }}, inputs.foo=${{ inputs.foo }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      foo:
+        type: string
+        description: foo is my input
+        required: false
+
+jobs:
+  foo:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo Hello, world!
