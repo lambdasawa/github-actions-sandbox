@@ -1,13 +1,19 @@
-
-name: Hello, world!
+name: Job Summary
 
 on:
   workflow_dispatch:
 
 jobs:
-  hello-world:
+  job-foo:
     runs-on: ubuntu-22.04
     steps:
       - run: echo '# foo' >> $GITHUB_STEP_SUMMARY
 
       - run: echo '# bar' >> $GITHUB_STEP_SUMMARY
+
+  job-bar:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo '# hoge' >> $GITHUB_STEP_SUMMARY
+
+      - run: echo '# fuga' >> $GITHUB_STEP_SUMMARY
