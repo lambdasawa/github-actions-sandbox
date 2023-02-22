@@ -1,0 +1,15 @@
+name: output
+
+on:
+  workflow_dispatch:
+
+jobs:
+  output:
+    runs-on: ubuntu-22.04
+    steps:
+      - id: build-foo
+      - run: echo foo=bar >> $GITHUB_OUTPUT
+
+      - run: echo $VALUE
+        env:
+          VALUE: ${{ steps.build-foo.outputs.foo }}
