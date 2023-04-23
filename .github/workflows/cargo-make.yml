@@ -17,4 +17,4 @@ jobs:
 
       - uses: davidB/rust-cargo-make@v1
 
-      - run: makers hello
+      - run: cargo make hello
