@@ -1,0 +1,20 @@
+name: cargo-make
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cargo-make:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - uses: davidB/rust-cargo-make@v1
+
+      - run: makers hello
